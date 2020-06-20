@@ -25,8 +25,7 @@ void cState1::ExecuteStateTask()
 {
     m_spData->m_vGuestBook.push_back( "State 1 was here" );
     m_spStatus->SetStatusMessage("STM: Executing state 1");
-
-    srand( (unsigned)time(NULL) );
+    
     size_t nRsandNum = ( rand() % 4 ) + 1;
     
     while(m_spData->nPreviousRandomNumber == nRsandNum )
@@ -44,7 +43,6 @@ void cState2::ExecuteStateTask()
     m_spData->m_vGuestBook.push_back( "State 2 was here" );
     m_spStatus->SetStatusMessage("STM: Executing state 2");
     
-    srand( (unsigned)time(NULL) );
     size_t nRsandNum = ( rand() % 4 ) + 1;
 
     while(m_spData->nPreviousRandomNumber == nRsandNum )
@@ -61,7 +59,7 @@ void cState3::ExecuteStateTask()
 {
     m_spData->m_vGuestBook.push_back( "State 3 was here" );
     m_spStatus->SetStatusMessage("STM: Executing state 3");
-    srand( (unsigned)time(NULL) );
+    
     size_t nRsandNum = ( rand() % 4 ) + 1;
 
     while(m_spData->nPreviousRandomNumber == nRsandNum)
@@ -131,7 +129,9 @@ m_spData(spData), m_spStatus(spStatus)
 
     m_spActualState = m_spState1;  
     m_spNextState = m_spState1;
-
+    
+    srand( (unsigned)time(NULL) );
+    
     m_spStatus->SetStatusMessage("STM: State machine is initialized");  
 }
 
