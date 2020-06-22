@@ -3,7 +3,6 @@
 #include <memory>
 #include <string>
 #include <iostream>
-
 class cData
 {
 public:
@@ -27,6 +26,7 @@ private:
     bool m_bExecutionStatus = true;
     std::shared_ptr<std::vector<std::string>> m_spExecMessage;
 };
+
 class cState
 {
 public:
