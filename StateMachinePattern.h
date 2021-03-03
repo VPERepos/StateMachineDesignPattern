@@ -3,90 +3,93 @@
 #include <memory>
 #include <string>
 #include <iostream>
-class cData
+class Data
 {
 public:
-    cData(){};
-    ~cData(){};
-    std::vector<std::string> m_vGuestBook;
+    Data(){};
+    ~Data(){};
+    std::vector<std::string> vGuestBook;
     bool bChangeState = true;
     size_t nPreviousRandomNumber=1;
 };
 
-class cStatus
+class Status
 {
 public:
-    cStatus();
-    ~cStatus(){};
-    void SetStatus(const bool& bExecStatus);
-    void SetStatusMessage(const std::string& sStatusMessage);
-    bool GetStatus() const;
-    std::shared_ptr<std::vector<std::string>> GetStatusMessage()const;
+    Status();
+    ~Status(){};
+    void setStatus(const bool& bExecStatus);
+    void setStatusMessage(const std::string& sStatusMessage);
+    bool getStatus() const;
+    std::shared_ptr<std::vector<std::string>> getStatusMessage()const;
 private:
-    bool m_bExecutionStatus = true;
-    std::shared_ptr<std::vector<std::string>> m_spExecMessage;
+    bool bExecutionStatus = true;
+    std::shared_ptr<std::vector<std::string>> spExecMessage;
 };
 
-class cState
+class State
 {
 public:
-    cState( ){};
-    virtual ~cState( ){};
-    void AddPossibleNextStates( const std::shared_ptr<cState>& spPossibleNextState );
-    std::shared_ptr<cState> ReturnNextState() const;
-    virtual void ExecuteStateTask(){};
-    void SetDataPointer( const std::shared_ptr<cData>& spData );
-    void SetStatusPointer( const std::shared_ptr<cStatus>& spStatus );
+    State( ){};
+    virtual ~State( ){};
+    void addPossibleNextStates( const std::shared_ptr<State>& spPossibleNextState );
+    std::shared_ptr<State> returnNextState() const;
+    virtual void executeStateTask(){};
+    
+    void setDataPointer( const std::shared_ptr<Data>& spData );
+    void setStatusPointer( const std::shared_ptr<Status>& spStatus );
 protected:
-    std::shared_ptr<cData> m_spData;
-    std::shared_ptr<cStatus> m_spStatus;
-    std::vector<std::shared_ptr<cState>> m_spPossibleNextStates;
-    std::shared_ptr<cState> m_spNextState;
+    std::shared_ptr<Data> spData;
+    std::shared_ptr<Status> spStatus;
+    std::vector<std::shared_ptr<State>> spPossibleNextStates;
+    std::shared_ptr<State> spNextState;
 };
 
-class cState1 : public cState
+class State1 : public State
 {
 public:
-    ~cState1()override {};
-    void ExecuteStateTask() override;
+    ~State1()override {};
+    void executeStateTask() override;
 };
 
-class cState2 : public cState
+class State2 : public State
 {
 public:
-    ~cState2()override {};
-    void ExecuteStateTask() override;
+    ~State2()override {};
+    void executeStateTask() override;
 };
 
-class cState3 : public cState
+class State3 : public State
 {
 public:
-    ~cState3()override {};
-    void ExecuteStateTask() override;
+    ~State3()override {};
+    void executeStateTask() override;
 };
 
-class cState4 : public cState
+class State4 : public State
 {
 public:
-    ~cState4()override {};
-    void ExecuteStateTask() override;
+    ~State4()override {};
+    void executeStateTask() override;
 };
 
-class cStateMachine
+class StateMachine
 {
 public: 
-    cStateMachine(const std::shared_ptr<cData>& spData, const std::shared_ptr<cStatus>& spStatus);
-    ~cStateMachine(){};
-    void RunSTM();
+    StateMachine(const std::shared_ptr<Data>& spData, const std::shared_ptr<Status>& spStatus);
+    ~StateMachine(){};
+    void runSTM();
+    void changeState();
+    bool checkForChangingState();
 private:
-    std::shared_ptr<cData> m_spData;   
-    std::shared_ptr<cStatus> m_spStatus; 
+    std::shared_ptr<Data> spData;   
+    std::shared_ptr<Status> spStatus; 
     
-    std::shared_ptr<cState> m_spActualState;
-    std::shared_ptr<cState> m_spNextState;
+    std::shared_ptr<State> spActualState;
+    std::shared_ptr<State> spNextState;
 
-    std::shared_ptr<cState> m_spState1;
-    std::shared_ptr<cState> m_spState2;
-    std::shared_ptr<cState> m_spState3;
-    std::shared_ptr<cState> m_spState4;
+    std::shared_ptr<State> spState1;
+    std::shared_ptr<State> spState2;
+    std::shared_ptr<State> spState3;
+    std::shared_ptr<State> spState4;
 };

@@ -1,0 +1,18 @@
+@startuml
+skinparam monochrome true
+skinparam classAttributeIconSize 0
+
+participant "main()" as A
+participant "shared_ptr<Data>:spData" as B
+participant "shared_ptr<Status>:spExecStatus" as C
+participant "unique_ptr<StateMachine>:spSTM" as D
+A ->  B **: make_shared<Data>()
+A ->  C **: make_shared<Status>()
+A ->  D **: make_unique<StateMachine>(spData, spExecStatus)
+A -> D : runSTM()
+activate D
+D ->> C : setStatusMessage("STM: Starting execution")
+loop checkForChangingState()
+    D -> D: changeState()
+end
+@enduml

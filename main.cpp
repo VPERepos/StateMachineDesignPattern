@@ -3,16 +3,16 @@
 int main()
 {
     
-    auto spData{ std::make_shared<cData>() };
-    auto spExecStatus{ std::make_shared<cStatus>() };
-    auto spSTM{ std::make_unique<cStateMachine>(spData, spExecStatus) };
+    auto spData{ std::make_shared<Data>() };
+    auto spExecStatus{ std::make_shared<Status>() };
+    auto spSTM{ std::make_unique<StateMachine>(spData, spExecStatus) };
 
-    spSTM->RunSTM();
+    spSTM->runSTM();
     
-    auto ResultingStatus = spExecStatus->GetStatusMessage();
-    for(auto Message : *(ResultingStatus.get()) )
+    auto resultingStatus = spExecStatus->getStatusMessage();
+    for(auto message : *(resultingStatus.get()) )
     {
-        std::cout << Message << std::endl;
+        std::cout << message << std::endl;
     }
     return 0;
 

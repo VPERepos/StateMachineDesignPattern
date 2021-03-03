@@ -4,75 +4,75 @@ skinparam monochrome true
 skinparam classAttributeIconSize 0
 
 together dataAndStatusGroup{
-    class cData{
-        +m_vGuestBook
+    class Data{
+        +vGuestBook[]
         +bChangeState = true
         +nPreviousRandomNumber=1
     }
 
-    class cStatus{
-        +SetStatus()
-        +SetStatusMessage()
-        +GetStatus()
-        +GetStatusMessage()
-        -m_bExecutionStatus = true
-        -m_spExecMessage
+    class Status{
+        +setStatus()
+        +setStatusMessage()
+        +getStatus()
+        +getStatusMessage()
+        -bExecutionStatus = true
+        -spExecMessage
     }
 }
-class cStateMachine{
-    -m_spData
-    -m_spStatus
-    -m_spActualState
-    -m_spNextState
-    -m_spState1
-    -m_spState2
-    -m_spState3
-    -m_spState4
-    +RunSTM()
+class StateMachine{
+    -spData
+    -spStatus
+    -spActualState
+    -spNextState
+    -spState1
+    -spState2
+    -spState3
+    -spState4
+    +runSTM()
 }
 
-class cState{
-    #m_spData
-    #m_spStatus
-    #m_spPossibleNextStates
-    #m_spNextState
-    +AddPossibleNextStates()
-    +ReturnNextState()
-    {abstract}+ExecuteStateTask()
-    +SetDataPointer()
-    +SetStatusPointer()
+class State{
+    #spData
+    #spStatus
+    #spPossibleNextStates
+    #spNextState
+    +addPossibleNextStates()
+    +returnNextState()
+    {abstract}+executeStateTask()
+    +setDataPointer()
+    +setStatusPointer()
 }
-class cState1{
-    +ExecuteStateTask()
+class State1{
+    +executeStateTask()
 }
-class cState2{
-    +ExecuteStateTask()
+class State2{
+    +executeStateTask()
 }
-class cState3{
-    +ExecuteStateTask()
+class State3{
+    +executeStateTask()
 }
-class cState4{
-    +ExecuteStateTask()
+class State4{
+    +executeStateTask()
 }
 
-cState <|-- cState1
-cState <|-- cState2
-cState <|-- cState3
-cState <|-- cState4
+State <|-- State1
+State <|-- State2
+State <|-- State3
+State <|-- State4
 
 
-cStateMachine *--> cState1
-cStateMachine *--> cState2
-cStateMachine *--> cState3
-cStateMachine *--> cState4
+StateMachine *--> State1
+StateMachine *--> State2
+StateMachine *--> State3
+StateMachine *--> State4
 
-cStateMachine ..> cState:<<uses>>
+StateMachine ..> State:<<uses>>
 
-cData -[hidden]down- cStatus
-cStateMachine o--> cData
-cStateMachine o--> cStatus
+Data -[hidden]down- Status
+StateMachine o--> Data
+StateMachine o--> Status
 
-cStateMachine -[hidden]right-- cData
-cStateMachine -[hidden]right-- cStatus
+StateMachine -[hidden]right-- Data
+StateMachine -[hidden]right-- Status
 
 @enduml
