@@ -79,6 +79,7 @@ public:
     StateMachine(const std::shared_ptr<Data>& spData, const std::shared_ptr<Status>& spStatus);
     ~StateMachine(){};
     void runSTM();
+protected:
     void changeState();
     bool checkForChangingState();
 private:

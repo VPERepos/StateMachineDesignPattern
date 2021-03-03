@@ -29,6 +29,8 @@ class StateMachine{
     -spState3
     -spState4
     +runSTM()
+    #checkForChangingState()
+    #changeState()
 }
 
 class State{
