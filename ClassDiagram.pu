@@ -61,16 +61,16 @@ cState <|-- cState3
 cState <|-- cState4
 
 
-cStateMachine *-- cState1
-cStateMachine *-- cState2
-cStateMachine *-- cState3
-cStateMachine *-- cState4
+cStateMachine *--> cState1
+cStateMachine *--> cState2
+cStateMachine *--> cState3
+cStateMachine *--> cState4
 
 cStateMachine ..> cState:<<uses>>
 
 cData -[hidden]down- cStatus
-cStateMachine o-- cData
-cStateMachine o-- cStatus
+cStateMachine o--> cData
+cStateMachine o--> cStatus
 
 cStateMachine -[hidden]right-- cData
 cStateMachine -[hidden]right-- cStatus
