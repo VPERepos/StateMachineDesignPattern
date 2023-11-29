@@ -1,4 +1,5 @@
 #include "StateMachinePattern.h"
+#include <memory>
 #include <time.h>
 
 void State::addPossibleNextStates( const std::shared_ptr<State>& spPossibleNextState )
@@ -95,13 +96,13 @@ void State4::executeStateTask()
 StateMachine::StateMachine(const std::shared_ptr<Data>& spData, const std::shared_ptr<Status>& spStatus):
 spData(spData), spStatus(spStatus)
 {
-    spActualState = std::shared_ptr<State>( new State1 );
-    spNextState = std::shared_ptr<State>( new State1 );
+    spActualState = std::make_shared<State1>();
+    spNextState = std::make_shared<State1>();
 
-    spState1 = std::shared_ptr<State>( new State1 );
-    spState2 = std::shared_ptr<State>( new State2 );
-    spState3 = std::shared_ptr<State>( new State3 );
-    spState4 = std::shared_ptr<State>( new State4 );
+    spState1 = std::make_shared<State1>();
+    spState2 = std::make_shared<State2>();
+    spState3 = std::make_shared<State3>();
+    spState4 = std::make_shared<State4>();
 
     spState1->setDataPointer( spData );
     spState2->setDataPointer( spData );
